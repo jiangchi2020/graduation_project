@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: poi
+          uri: prot://ip:port
+          predicates:
+            - Path=/api/v1/poi/**
+    sentinel:
+      transport:
+        dashboard: ip:port
+      filter:
+        enabled: false
+
+server:
+  port: 7070

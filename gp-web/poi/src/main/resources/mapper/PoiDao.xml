@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scarike.gp.web.poi.dao.PoiDao">
+    <resultMap id="poiDetailMap" type="com.scarike.gp.web.common.entity.Poi">
+        <id property="pid" column="pid" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        <result property="tel" column="tel" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="description" column="description" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <collection property="photo" javaType="java.util.List" ofType="java.lang.String">
+            <result column="photo" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="poiListMap" type="com.scarike.gp.web.common.entity.Poi">
+        <id property="pid" column="pid" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        <result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="address" column="address" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="description" column="description" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="lon" column="lon" javaType="java.lang.Double" jdbcType="DOUBLE"/>
+        <result property="lat" column="lat" javaType="java.lang.Double" jdbcType="DOUBLE"/>
+        <result property="type" column="type" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectPoiById" resultMap="poiDetailMap">
+        SELECT t1.pid as pid, t1.tel as tel, t1.description as description, t2.photo_url as photo
+        FROM "gp"."public"."poi_050000" as t1
+                 LEFT JOIN "gp"."public"."poi_050000_photo" as t2 ON t1.pid = t2.pid
+        WHERE t1.pid = #{pid};
+    </select>
+
+    <select id="pointBufferAnalysisFor05" resultMap="poiListMap">
+        SELECT t1.pid as pid,t1."name" as "name",t1.address as address,t1.lon as lon,t1.lat as lat,t2."name" as "type"
+        FROM poi_050000 as t1 JOIN poi_code as t2 ON t1.type_code=t2.type_code
+        WHERE st_contains(st_buffer((SELECT wkb_geometry FROM station WHERE "name"=#{center}), #{distance}, 'quad_segs=4'), wkb_geometry)
+          AND t1."type_code"/#{maskCode}*#{maskCode} = #{typeCode};
+    </select>
+
+    <select id="pointBufferAnalysisFor10" resultMap="poiListMap">
+        SELECT t1.pid as pid,t1."name" as "name",t1.address as address,t1.lon as lon,t1.lat as lat,t2."name" as "type"
+        FROM poi_100000 as t1 JOIN poi_code as t2 ON t1.type_code=t2.type_code
+        WHERE st_contains(st_buffer((SELECT wkb_geometry FROM station WHERE "name"=#{center}), #{distance}, 'quad_segs=4'), wkb_geometry)
+          AND t1."type_code"/#{maskCode}*#{maskCode} = #{typeCode};
+    </select>
+
+    <select id="pointBufferAnalysisFor11" resultMap="poiListMap">
+        SELECT t1.pid as pid,t1."name" as "name",t1.address as address,t1.lon as lon,t1.lat as lat,t2."name" as "type"
+        FROM poi_110000 as t1 JOIN poi_code as t2 ON t1.type_code=t2.type_code
+        WHERE st_contains(st_buffer((SELECT wkb_geometry FROM station WHERE "name"=#{center}), #{distance}, 'quad_segs=4'), wkb_geometry)
+          AND t1."type_code"/#{maskCode}*#{maskCode} = #{typeCode};
+    </select>
+
+    <select id="lineBufferAnalysisFor05" resultMap="poiListMap">
+        SELECT t1.pid,t1."name",t1.address,t1.lon,t1.lat,t2."name" as "type"
+        FROM poi_050000 as t1 JOIN poi_code as t2 ON t1.type_code=t2.type_code
+        WHERE st_contains(st_buffer((SELECT wkb_geometry FROM cn_railway_gcj02_3857 WHERE "name"=#{center}), #{distance}, 'endcap=round join=round'), wkb_geometry)
+          AND t1."type_code"/#{maskCode}*#{maskCode} = #{typeCode};
+    </select>
+
+    <select id="lineBufferAnalysisFor10" resultMap="poiListMap">
+        SELECT t1.pid,t1."name",t1.address,t1.lon,t1.lat,t2."name" as "type"
+        FROM poi_100000 as t1 JOIN poi_code as t2 ON t1.type_code=t2.type_code
+        WHERE st_contains(st_buffer((SELECT wkb_geometry FROM cn_railway_gcj02_3857 WHERE "name"=#{center}), #{distance}, 'endcap=round join=round'), wkb_geometry)
+          AND t1."type_code"/#{maskCode}*#{maskCode} = #{typeCode};
+    </select>
+
+    <select id="lineBufferAnalysisFor11" resultMap="poiListMap">
+        SELECT t1.pid,t1."name",t1.address,t1.lon,t1.lat,t2."name" as "type"
+        FROM poi_110000 as t1 JOIN poi_code as t2 ON t1.type_code=t2.type_code
+        WHERE st_contains(st_buffer((SELECT wkb_geometry FROM cn_railway_gcj02_3857 WHERE "name"=#{center}), #{distance}, 'endcap=round join=round'), wkb_geometry)
+          AND t1."type_code"/#{maskCode}*#{maskCode} = #{typeCode};
+    </select>
+
+</mapper>

@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+// 选项配置
+option java_package = "com.scarike.gp.web.grpc";
+option java_outer_classname = "RpcNlpServiceApi";
+option java_multiple_files = true;
+option optimize_for = SPEED;
+
+package com.scarike.gp.web.grpc;
+
+service RpcNlpService {
+  rpc analysis (RpcNlpRequest) returns (RpcNlpResponse){}
+}
+
+message RpcNlpRequest {
+  string query = 1;
+}
+
+message RpcNlpResponse {
+  sint32 status = 1;
+  string message = 2;
+  repeated Keyword keyword = 3;
+
+  enum QueryType {
+    POINT = 0;
+    LINE = 1;
+  }
+
+  message Keyword {
+    QueryType type = 1;
+    string center = 2;
+    int32 distance = 3;
+    int32 poiCode = 4;
+    string key = 5;
+  }
+}

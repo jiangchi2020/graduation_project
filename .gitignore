@@ -1,0 +1,15 @@
+/.idea
+
+/out
+
+/test_tmp
+
+**/target
+
+/gp-crawler/sql
+
+**/*-dev.properties
+
+**/*-dev.yml
+
+**/*.iml

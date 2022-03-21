@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: gp-gateway
+  profiles:
+    active: dev
