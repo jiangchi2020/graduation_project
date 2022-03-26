@@ -16,6 +16,7 @@ public class Poi {
     private String tel;
     private String description;
     private String type;
+    private String typeCode;
     private List<String> photo;
     private Double lon;
     private Double lat;

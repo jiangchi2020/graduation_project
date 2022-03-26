@@ -6,7 +6,7 @@
           <div class="ps-icon-div"><i class="el-icon-s-promotion"></i></div>
         </div>
         <div class="ps-query-search" :style="{'width':height}" @click="search">
-          <div class="ps-icon-div"><i style="cursor: pointer" class="el-icon-map-location"></i></div>
+          <div class="ps-icon-div"><i style="cursor: pointer" :class="{'el-icon-map-location':!inSearching,'el-icon-loading':inSearching}"></i></div>
         </div>
         <div class="ps-query-text" :style="{'margin-left':height,'margin-right':height}">
           <input type="text" v-model="key" :placeholder="placeholder">
@@ -50,16 +50,25 @@ const emit=defineEmits(["locate", "select", "search"]);
 
 let key=shallowRef("");
 let searchResult=shallowRef(null);
+
+let inSearching=shallowRef(false);
+
 const search = ()=> {
-  if (key.value !== null && key.value !== undefined && key.value.trim().length !== 0) {
-    API.searchPoi(key.value).then(resp => {
-      if (resp.data.code === 0) {
-        searchResult.value = resp.data.data;
-        emit("search",searchResult.value);
-      } else {
-        notice.error(resp.data.msg);
-      }
-    })
+  if(!inSearching.value){
+    if (key.value !== null && key.value !== undefined && key.value.trim().length !== 0) {
+      inSearching.value=true;
+      API.searchPoi(key.value).then(resp => {
+        inSearching.value=false;
+        if (resp.data.status === 0) {
+          searchResult.value = resp.data.data;
+          emit("search",searchResult.value);
+        } else {
+          notice.error(resp.data.message);
+        }
+      }).catch(e => {
+        inSearching.value=false;
+      })
+    }
   }
 };
 const onLocate = ()=> {

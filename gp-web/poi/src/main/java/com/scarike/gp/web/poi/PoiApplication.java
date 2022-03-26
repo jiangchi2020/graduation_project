@@ -8,5 +8,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class PoiApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(PoiApplication.class, args);
+        return;
     }
 }

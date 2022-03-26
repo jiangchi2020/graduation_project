@@ -6,6 +6,7 @@
 import AMapLoader from '@amap/amap-jsapi-loader';
 import stationList from "@/assets/station";
 import {onMounted, watch, defineProps, defineEmits} from "vue";
+import {COUNTRY_OGC_URL, RAILWAY_OGC_URL} from "@/http/ogc-url";
 
 const props = defineProps({
   pois: {
@@ -37,35 +38,23 @@ onMounted(()=>{
     let background = new AMap.TileLayer.Satellite();
     // 中国国境线图层
     let countryBoundary = new AMap.TileLayer.WMS({
-      url: 'http://localhost:8080/geoserver/wms',
+      url: COUNTRY_OGC_URL,
       blend: false,
       tileSize: 256,
       params: {
         VERSION: '1.1.1',
-        'LAYERS': 'gp:country',
-        SRS: "EPSG:3857",
-      }
-    });
-    // 中国省界线图层
-    let provinceBoundary = new AMap.TileLayer.WMS({
-      url: 'http://localhost:8080/geoserver/wms',
-      blend: false,
-      tileSize: 256,
-      zooms: [5, 16],
-      params: {
-        VERSION: '1.1.1',
-        'LAYERS': 'gp:province',
+        'LAYERS': 'gp:discountry',
         SRS: "EPSG:3857",
       }
     });
     // 中国铁路线路图层
     let railway = new AMap.TileLayer.WMS({
-      url: 'http://localhost:8080/geoserver/wms',
+      url: RAILWAY_OGC_URL,
       blend: false,
       tileSize: 256,
       params: {
         VERSION: '1.1.1',
-        'LAYERS': 'gp:railway',
+        'LAYERS': 'gp:cn_railway_gcj02_3857',
         SRS: "EPSG:3857",
       }
     });
@@ -73,9 +62,13 @@ onMounted(()=>{
     map = new AMap.Map("container", {
       zooms: [2, 16],
       zoom: 5,
-      center: [0,0],
-      layers: [background, /*countryBoundary, provinceBoundary, railway*/]
+      center: [105.095028,36.505157],
+      // layers: [background, countryBoundary, railway]
+      layers: [background]
     });
+    map.on('zoomchange',function (e){
+      console.log(e.target.getZoom());
+    })
     // 车站标记样式
     let stationStyle = {
       url: '/station2.ico',
@@ -129,6 +122,7 @@ watch(() => props.pois ,(newValue,oldValue)=>{
     let center=[(maxLon+minLon)/2,(maxLat+minLat)/2];
     map.add(poiMarks);
     map.setCenter(center);
+    map.setZoom(9);
     poiMarkers=poiMarks;
   }
 })

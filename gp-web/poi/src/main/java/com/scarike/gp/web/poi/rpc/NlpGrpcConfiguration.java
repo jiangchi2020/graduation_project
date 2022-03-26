@@ -4,6 +4,7 @@ import com.alibaba.csp.sentinel.adapter.grpc.SentinelGrpcClientInterceptor;
 import com.scarike.gp.web.grpc.RpcNlpServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,7 +22,7 @@ public class NlpGrpcConfiguration {
     public RpcNlpServiceGrpc.RpcNlpServiceBlockingStub nlpServiceBlockingStub(ManagedChannel channel){
         return RpcNlpServiceGrpc.newBlockingStub(channel);
     }
-
+/*
     @Bean
     public RpcNlpServiceGrpc.RpcNlpServiceFutureStub nlpServiceFutureStub(ManagedChannel channel){
         return RpcNlpServiceGrpc.newFutureStub(channel);
@@ -30,5 +31,5 @@ public class NlpGrpcConfiguration {
     @Bean
     public RpcNlpServiceGrpc.RpcNlpServiceStub nlpServiceStub(ManagedChannel channel){
         return RpcNlpServiceGrpc.newStub(channel);
-    }
+    }*/
 }

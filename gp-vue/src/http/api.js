@@ -8,9 +8,9 @@ function searchPoi(query){
     });
 }
 
-function poiDetail(pid){
+function poiDetail(pid,pcode){
     return axios({
-        url: URL_POI_DETAIL+pid,
+        url: URL_POI_DETAIL+pcode+"/"+pid,
         method: "GET"
     });
 }

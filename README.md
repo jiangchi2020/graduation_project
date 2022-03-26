@@ -27,20 +27,21 @@
 所有java代码以```com.scarike.gp```开头（gp即graduation_project）
 
 ### module
-|模组|子包名|描述|类型|创建时间|
+|模组|子包名|类型|描述|创建时间|
 |:---:|:---:|:---|:---|:---|
 |gp-crawler|```crawler```|maven|爬虫|2022-01-02|
 |gp-vue|```-```|vue-cli|[项目前端模块](gp-vue/README.md)|2022-01-12|
 |gp-web|```web```|maven|[JavaWeb后端父工程](gp-web/README.md)|2022-03-13|
 
 #### gp-web子模块
-|模组|子包名|端口|描述|类型|创建时间|
+|模组|子包名|端口|类型|描述|创建时间|
 |:---:|:---:|:---:|:---|:---|:---|
 |common|```common```|-|maven|通用模块|2022-03-13|
 |common-spring-boot-starter|```common.starter```|-|spring boot starter|通用SpringBoot自动配置|2022-03-13|
 |nlp-interface|```grpc```|-|maven|NLP服务gRPC接口|2022-03-13|
 |gateway|```gateway```|7070+|Spring Cloud Gateway|限流网关|2022-03-16|
 |poi|```poi```|8080+|Spring Boot|POI服务|2022-03-13|
+|nlp|```-```|20880+|Python|自然语言处理模块实现|2022-03-21|
 |sentinel dashboard|```-```|9090+|Sentinel Dashboard|Sentinel控制台|2022-03-16|
 |nacos|```-```|8848,9848,9849|nacos注册中心|nacos|2022-03-16|
 
@@ -230,11 +231,21 @@ SpringBoot整合Postgresql，实现基于PostGIS的缓冲区查询
 
 所以目前来说，整个项目需要部署的组件有：
 
-1. nginx+静态资源文件
-2. postgresql+postgis
-3. geoserver
-4. sentinel dashboard（需要支持和poi-service双向通信）
-5. nacos
-6. poi-service
-7. gp-gateway
-8. nlp-service（python）
+||||
+|:---:|:---|:---:|
+|1|nginx+静态资源文件|80|
+|2|postgresql+postgis|5432|
+|3|geoserver|6060+|
+|7|gp-gateway|7070+|
+|6|poi-service|8080+,8719|
+|4|sentinel dashboard（需要支持和poi-service/gp-gatewat双向通信）|9090|
+|5|nacos|8848,9848,9849|
+|8|nlp-service（python）|20880+|
+
+### 2022-03-21
+
+不得已，删除远程代码仓库，并重新提交。隐藏关键连接信息
+
+改进proto接口，增加查询关键字字段key以便对根据poi_code查询出的结果做进一步筛选。
+
+新增nlp模块为自然语言处理接口的实现。

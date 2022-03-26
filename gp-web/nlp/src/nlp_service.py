@@ -13,14 +13,14 @@ class NlpService(RpcNlpServiceServicer):
                 RpcNlpResponse.Keyword(
                     type=RpcNlpResponse.QueryType.POINT,
                     center="成都东",
-                    distance=20000,
+                    distance=1000,
                     poiCode=110000,
                     key="公园"
                 ),
                 RpcNlpResponse.Keyword(
                     type=RpcNlpResponse.QueryType.POINT,
                     center="合肥南",
-                    distance=10000,
+                    distance=1000,
                     poiCode=50000,
                     key="酒店"
                 )

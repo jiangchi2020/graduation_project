@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface PoiDao {
-    Poi selectPoiById(@Param("pid") Long pid);
+    Poi selectPoiById(@Param("pid") Long pid,@Param("poiCode") String poiCode);
     List<Poi> pointBufferAnalysisFor05(@Param("center") String center,@Param("distance") Integer distance,@Param("typeCode") Integer typeCode,@Param("maskCode") Integer maskCode);
     List<Poi> pointBufferAnalysisFor10(@Param("center") String center,@Param("distance") Integer distance,@Param("typeCode") Integer typeCode,@Param("maskCode") Integer maskCode);
     List<Poi> pointBufferAnalysisFor11(@Param("center") String center,@Param("distance") Integer distance,@Param("typeCode") Integer typeCode,@Param("maskCode") Integer maskCode);

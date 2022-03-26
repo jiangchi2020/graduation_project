@@ -40,19 +40,19 @@ let detail=shallowRef({
   photo: []
 });
 
-const flushContent = (pid) => {
-  API.poiDetail(pid).then(resp => {
-    if (resp.data.code === 0) {
+const flushContent = (pid,pcode) => {
+  API.poiDetail(pid,pcode).then(resp => {
+    if (resp.data.status === 0) {
       detail.value = resp.data.data;
     } else {
-      notice.error(resp.data.msg);
+      notice.error(resp.data.message);
     }
   })
 };
 
-onMounted(()=>{flushContent(props.poi.pid)});
+onMounted(()=>{flushContent(props.poi.pid,props.poi.typeCode)});
 
-watch(()=>props.poi,(newPoi)=>{flushContent(newPoi.pid)})
+watch(()=>props.poi,(newPoi)=>{flushContent(newPoi.pid,newPoi.typeCode)})
 
 </script>
 

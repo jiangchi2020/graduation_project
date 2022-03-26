@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/poi")
 public class PoiController {
@@ -24,9 +25,9 @@ public class PoiController {
         return SimpleResponse.ok(pois);
     }
 
-    @GetMapping("/detail/{pid}")
-    public SimpleResponse<Poi> detail(@PathVariable("pid") Long pid) {
-        return SimpleResponse.ok(service.getPoiById(pid));
+    @GetMapping("/{code}/{pid}")
+    public SimpleResponse<Poi> detail(@PathVariable("pid") Long pid,@PathVariable("code") String code) {
+        return SimpleResponse.ok(service.getPoiById(pid,code));
     }
 
 }

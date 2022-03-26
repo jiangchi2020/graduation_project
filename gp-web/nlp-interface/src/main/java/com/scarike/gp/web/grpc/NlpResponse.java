@@ -1,6 +1,5 @@
 package com.scarike.gp.web.grpc;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
