@@ -238,7 +238,7 @@ SpringBoot整合Postgresql，实现基于PostGIS的缓冲区查询
 |3|geoserver|6060+|
 |7|gp-gateway|7070+|
 |6|poi-service|8080+,8719|
-|4|sentinel dashboard（需要支持和poi-service/gp-gatewat双向通信）|9090|
+|4|sentinel dashboard（需要支持和poi-service/gp-gateway双向通信）|9090|
 |5|nacos|8848,9848,9849|
 |8|nlp-service（python）|20880+|
 
