@@ -16,21 +16,16 @@
   </div>
 </template>
 
-<script setup>
-import API from "@/http/api";
-import notice from "@/util/notice";
-import RotatePictures from "@/components/RotatePictures";
-import {onMounted, watch, defineProps, defineEmits, ref, shallowRef} from "vue";
+<script lang="ts" setup>
+import API from "../http/api";
+import notice from "../util/notice";
+import RotatePictures from "./RotatePictures.vue"
+import {onMounted, watch, ref, shallowRef} from "vue";
+import {Poi} from "../entity/Poi";
 
-const props = defineProps({
-  poi: {
-    type: Object,
-    require: true,
-    default() {
-      return null;
-    }
-  }
-});
+const props = defineProps<{
+  poi: Poi
+}>();
 const emit = defineEmits(["close"]);
 
 let detail=shallowRef({
@@ -50,9 +45,9 @@ const flushContent = (pid,pcode) => {
   })
 };
 
-onMounted(()=>{flushContent(props.poi.pid,props.poi.typeCode)});
+onMounted(()=>{flushContent(props.poi.pid,props.poi.type)});
 
-watch(()=>props.poi,(newPoi)=>{flushContent(newPoi.pid,newPoi.typeCode)})
+watch(()=>props.poi,(newPoi)=>{flushContent(newPoi.pid,newPoi.type)})
 
 </script>
 

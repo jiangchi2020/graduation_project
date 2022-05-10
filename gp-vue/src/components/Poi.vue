@@ -6,15 +6,12 @@
   </div>
 </template>
 
-<script setup>
-import {defineProps,defineEmits} from "vue";
+<script lang="ts" setup>
+import {Poi} from "../entity/Poi";
 
-const props=defineProps({
-  poi: {
-    type: Object,
-    default: null
-  }
-});
+const props=defineProps<{
+  poi: Poi
+}>();
 const emit = defineEmits(["choose"]);
 
 </script>

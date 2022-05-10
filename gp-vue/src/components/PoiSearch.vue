@@ -6,7 +6,9 @@
           <div class="ps-icon-div"><i class="el-icon-s-promotion"></i></div>
         </div>
         <div class="ps-query-search" :style="{'width':height}" @click="search">
-          <div class="ps-icon-div"><i style="cursor: pointer" :class="{'el-icon-map-location':!inSearching,'el-icon-loading':inSearching}"></i></div>
+          <div class="ps-icon-div"><i style="cursor: pointer"
+                                      :class="{'el-icon-map-location':!inSearching,'el-icon-loading':inSearching}"></i>
+          </div>
         </div>
         <div class="ps-query-text" :style="{'margin-left':height,'margin-right':height}">
           <input type="text" v-model="key" :placeholder="placeholder">
@@ -34,44 +36,44 @@
   </div>
 </template>
 
-<script setup>
-import API from "@/http/api";
-import notice from "@/util/notice";
-import Poi from "@/components/Poi";
-import {defineProps, defineEmits, ref, shallowRef} from "vue";
+<script lang="ts" setup>
+import API from "../http/api";
+import notice from "../util/notice";
+import Poi from "./Poi.vue";
+import { ref, shallowRef} from "vue";
 
-const props = defineProps({
-  placeholder: {type: String, default: "输入查询"},
-  width: {type: String, default: "330px"},
-  height: {type: String, default: "45px"},
-  maxHeight: {type: String, default: "500px"},
-});
-const emit=defineEmits(["locate", "select", "search"]);
+const props = withDefaults(defineProps<{
+  placeholder: string
+  width: string
+  height: string
+  maxHeight: string
+}>(), {placeholder: "输入查询", width: "330px", height: "45px", maxHeight: "500px"});
+const emit = defineEmits(["locate", "select", "search"]);
 
-let key=shallowRef("");
-let searchResult=shallowRef(null);
+let key = shallowRef("");
+let searchResult = shallowRef(null);
 
-let inSearching=shallowRef(false);
+let inSearching = shallowRef(false);
 
-const search = ()=> {
-  if(!inSearching.value){
+const search = () => {
+  if (!inSearching.value) {
     if (key.value !== null && key.value !== undefined && key.value.trim().length !== 0) {
-      inSearching.value=true;
+      inSearching.value = true;
       API.searchPoi(key.value).then(resp => {
-        inSearching.value=false;
+        inSearching.value = false;
         if (resp.data.status === 0) {
           searchResult.value = resp.data.data;
-          emit("search",searchResult.value);
+          emit("search", searchResult.value);
         } else {
           notice.error(resp.data.message);
         }
       }).catch(e => {
-        inSearching.value=false;
+        inSearching.value = false;
       })
     }
   }
 };
-const onLocate = ()=> {
+const onLocate = () => {
   if ("geolocation" in navigator) {
     /* 地理位置服务可用 */
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -83,12 +85,12 @@ const onLocate = ()=> {
     notice.warn("您的浏览器不支持地理位置服务");
   }
 };
-const onClose = ()=>{
-  searchResult.value=null;
+const onClose = () => {
+  searchResult.value = null;
   emit("close");
 };
-const onSelect = (poi)=>{
-  emit("select",poi);
+const onSelect = (poi) => {
+  emit("select", poi);
 }
 </script>
 
@@ -176,10 +178,11 @@ const onSelect = (poi)=>{
   margin-left: 10px;
 }
 
-.search-result-enter-from{
+.search-result-enter-from {
   transform: translateY(-100%);
 }
-.search-result-leave-to{
+
+.search-result-leave-to {
   transform: translateY(-100%);
 }
 </style>

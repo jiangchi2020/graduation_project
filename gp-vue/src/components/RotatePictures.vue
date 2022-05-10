@@ -16,18 +16,13 @@
   </div>
 </template>
 
-<script setup>
-import {defineProps, shallowRef, watch} from "vue";
-const props = defineProps({
-  pictures:{
-    type:Array,
-    default(){
-      return [];
-    }
-  },
-  width:{type:String,require:true},
-  height:{type:String,require:true}
-});
+<script lang="ts" setup>
+import { shallowRef, watch} from "vue";
+const props = defineProps<{
+  pictures: string[],
+  width: string,
+  height: string
+}>();
 let photoIndex=shallowRef(0);
 const previousPhoto = () => {
   if(photoIndex.value>0){

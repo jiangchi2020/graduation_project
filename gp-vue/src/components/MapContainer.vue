@@ -2,26 +2,17 @@
   <div id="container"></div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import AMapLoader from '@amap/amap-jsapi-loader';
-import stationList from "@/assets/station";
-import {onMounted, watch, defineProps, defineEmits} from "vue";
-import {COUNTRY_OGC_URL, RAILWAY_OGC_URL} from "@/http/ogc-url";
+import stationList from "../assets/station";
+import {Poi} from "../entity/Poi";
+import {onMounted, watch} from "vue";
+import {COUNTRY_OGC_URL, RAILWAY_OGC_URL} from "../http/ogc-url";
 
-const props = defineProps({
-  pois: {
-    type: Array,
-    default() {
-      return null;
-    }
-  },
-  poi: {
-    type: Object,
-    default() {
-      return null;
-    }
-  }
-});
+const props = defineProps<{
+  pois: Poi[],
+  poi: Poi
+}>();
 const emit = defineEmits(["select"]);
 
 let poiMarkers=null;

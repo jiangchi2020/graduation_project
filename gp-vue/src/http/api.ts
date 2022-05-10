@@ -1,14 +1,14 @@
-import axios from "@/http/request";
-import {URL_POI_DETAIL, URL_POI_SEARCH} from "@/http/api-url";
+import axios from "./request";
+import {URL_POI_DETAIL, URL_POI_SEARCH} from "./api-url";
 
-function searchPoi(query){
+function searchPoi(query:string){
     return axios({
         url: URL_POI_SEARCH+"?query="+query,
         method: "GET"
     });
 }
 
-function poiDetail(pid,pcode){
+function poiDetail(pid:string,pcode:string){
     return axios({
         url: URL_POI_DETAIL+pcode+"/"+pid,
         method: "GET"

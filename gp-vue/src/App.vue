@@ -7,11 +7,11 @@
   </transition>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
-import MapContainer from "@/components/MapContainer";
-import PoiDetail from "@/components/PoiDetail";
-import PoiSearch from "@/components/PoiSearch";
+import MapContainer from "./components/MapContainer.vue";
+import PoiDetail from "./components/PoiDetail.vue";
+import PoiSearch from "./components/PoiSearch.vue";
 import {ref,shallowRef} from "vue";
 
 let searchResult=shallowRef(null);

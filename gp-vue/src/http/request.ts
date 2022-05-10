@@ -1,5 +1,5 @@
 import axios from "axios";
-import notice from "@/util/notice";
+import notice from "../util/notice";
 
 // axios.defaults.baseURL="http://localhost:4523/mock/673921/test";
 axios.defaults.baseURL="http://localhost:8081";
