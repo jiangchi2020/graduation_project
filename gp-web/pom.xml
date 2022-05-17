@@ -17,7 +17,6 @@
         <module>common</module>
         <module>common-spring-boot-starter</module>
         <module>poi</module>
-        <module>nlp-interface</module>
         <module>gateway</module>
     </modules>
     <packaging>pom</packaging>
@@ -103,11 +102,6 @@
             <dependency>
                 <groupId>com.scarike.gp.web</groupId>
                 <artifactId>common-spring-boot-starter</artifactId>
-                <version>${gp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.scarike.gp.web</groupId>
-                <artifactId>nlp-interface</artifactId>
                 <version>${gp.version}</version>
             </dependency>
         </dependencies>

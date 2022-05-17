@@ -1,7 +1,5 @@
 package com.scarike.gp.web.poi.rpc;
 
-import com.scarike.gp.web.grpc.NlpResponse;
-import io.grpc.StatusRuntimeException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

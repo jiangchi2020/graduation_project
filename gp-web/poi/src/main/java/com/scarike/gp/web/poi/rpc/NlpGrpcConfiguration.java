@@ -1,10 +1,9 @@
 package com.scarike.gp.web.poi.rpc;
 
 import com.alibaba.csp.sentinel.adapter.grpc.SentinelGrpcClientInterceptor;
-import com.scarike.gp.web.grpc.RpcNlpServiceGrpc;
+import com.scarike.gp.web.common.grpc.RpcNlpServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

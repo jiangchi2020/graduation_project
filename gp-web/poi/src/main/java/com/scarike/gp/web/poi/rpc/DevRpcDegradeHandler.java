@@ -1,14 +1,14 @@
 package com.scarike.gp.web.poi.rpc;
 
-import com.scarike.gp.web.grpc.NlpResponse;
-import com.scarike.gp.web.grpc.RpcNlpResponse;
+import com.scarike.gp.web.common.grpc.Keyword;
+import com.scarike.gp.web.common.grpc.RpcNlpResponse;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DevRpcDegradeHandler implements RpcDegradeHandler {
     private final static RpcNlpResponse[] RESPONSE_EXAMPLE_POOL = {
             RpcNlpResponse.newBuilder().setStatus(0).setMessage("OK")
-                    .addKeyword(
+                    .setKeyword(
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("合安高铁")
                                     .setType(RpcNlpResponse.QueryType.LINE)
@@ -17,7 +17,7 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                                     .build()
                     ).build(),
             RpcNlpResponse.newBuilder().setStatus(0).setMessage("OK")
-                    .addKeyword(
+                    .setKeyword(
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("成渝高速线")
                                     .setType(RpcNlpResponse.QueryType.LINE)
@@ -26,7 +26,7 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                                     .build()
                     ).build(),
             RpcNlpResponse.newBuilder().setStatus(0).setMessage("OK")
-                    .addKeyword(
+                    .setKeyword(
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("京广高铁")
                                     .setType(RpcNlpResponse.QueryType.LINE)
@@ -35,7 +35,7 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                                     .build()
                     ).build(),
             RpcNlpResponse.newBuilder().setStatus(0).setMessage("OK")
-                    .addKeyword(
+                    .setKeyword(
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("成都东")
                                     .setType(RpcNlpResponse.QueryType.POINT)
@@ -44,7 +44,7 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                                     .build()
                     ).build(),
             RpcNlpResponse.newBuilder().setStatus(0).setMessage("OK")
-                    .addKeyword(
+                    .setKeyword(
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("合肥南")
                                     .setType(RpcNlpResponse.QueryType.POINT)
@@ -53,7 +53,7 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                                     .build()
                     ).build(),
             RpcNlpResponse.newBuilder().setStatus(0).setMessage("OK")
-                    .addKeyword(
+                    .setKeyword(
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("天柱山")
                                     .setType(RpcNlpResponse.QueryType.POINT)
@@ -63,8 +63,8 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                     ).build()};
 
     @Override
-    public NlpResponse apply(Throwable e, Object... args) {
+    public Keyword apply(Throwable e, Object... args) {
         e.printStackTrace();
-        return NlpResponse.from(RESPONSE_EXAMPLE_POOL[(int) (Math.random()* RESPONSE_EXAMPLE_POOL.length)]);
+        return Keyword.from(RESPONSE_EXAMPLE_POOL[(int) (Math.random()* RESPONSE_EXAMPLE_POOL.length)]);
     }
 }
