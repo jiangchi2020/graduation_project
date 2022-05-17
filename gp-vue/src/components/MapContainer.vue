@@ -15,9 +15,9 @@ const props = defineProps<{
 }>();
 const emit = defineEmits(["select"]);
 
-let poiMarkers=null;
-let AMap=null;
-let map=null;
+let poiMarkers:any=null;
+let AMap:any=null;
+let map:any=null;
 
 onMounted(()=>{
   AMapLoader.load({
@@ -57,7 +57,7 @@ onMounted(()=>{
       // layers: [background, countryBoundary, railway]
       layers: [background]
     });
-    map.on('zoomchange',function (e){
+    map.on('zoomchange',function (e:any){
       console.log(e.target.getZoom());
     })
     // 车站标记样式
@@ -75,12 +75,12 @@ onMounted(()=>{
     // 车站标记注释
     let marker = new AMap.Marker({content: ' '});
     let markerOffset = new AMap.Pixel(9, 0);
-    stationMarks.on('mouseover', function (e) {
+    stationMarks.on('mouseover', function (e:any) {
       marker.setPosition(e.data.lnglat);
       marker.setLabel({content: e.data.name + '站', offset: markerOffset});
       map.add(marker);
     });
-    stationMarks.on('mouseout', function (e) {
+    stationMarks.on('mouseout', function (e:any) {
       map.remove(marker);
     });
     stationMarks.setMap(map);

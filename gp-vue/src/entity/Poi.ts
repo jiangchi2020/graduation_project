@@ -7,7 +7,7 @@ export interface Poi{
     lat: number
 }
 export interface PoiDetail{
-    poi: string,
+    pid: string,
     tel: string,
     description: string,
     photo: string[]

@@ -13,27 +13,27 @@ import MapContainer from "./components/MapContainer.vue";
 import PoiDetail from "./components/PoiDetail.vue";
 import PoiSearch from "./components/PoiSearch.vue";
 import {ref,shallowRef} from "vue";
+import { Poi } from "./entity/Poi";
 
-let searchResult=shallowRef(null);
 let poiDetailVisible=shallowRef(false);
-let pois=shallowRef(null);
-let poi=shallowRef(null);
+let pois=shallowRef<Poi[]>([]);
+let poi=shallowRef<Poi>({pid:"",name:"",address:"",type:"",lon:0,lat:0});
 
-const onLocate = (pos) => {
-
+const onLocate = (pos:Poi) => {
+  poi.value=pos;
 }
-const showDetail = (_poi) => {
+const showDetail = (_poi:Poi) => {
   poi.value=_poi;
   poiDetailVisible.value=true;
 }
-const closeDetail = (_poi) => {
+const closeDetail = () => {
   poiDetailVisible.value=false;
 }
-const onSearch = (_pois) => {
+const onSearch = (_pois:Poi[]) => {
   pois.value=_pois;
 }
 const clearMarkers = () => {
-  pois.value=null;
+  pois.value=[];
 }
 </script>
 

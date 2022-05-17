@@ -20,15 +20,15 @@
     </div>
     <div class="ps-result">
       <transition name="search-result">
-        <div v-if="searchResult!==null" class="ps-result-list ps-component" :style="{'width':width}">
+        <div v-if="searchResult!==null&&searchResult.length>0" class="ps-result-list ps-component" :style="{'width':width}">
           <div :style="{'max-height':`calc(${maxHeight} - ${height} - 10px)`}">
-            <Poi v-for="(poi,index) in searchResult" :key="index" :poi="poi" @choose="onSelect(poi)"
-                 :style="{'border-top':index===0?'none':'1px #aaa solid'}"></Poi>
+            <PoiComponent v-for="(poi,index) in searchResult" :key="index" :poi="poi" @choose="onSelect(poi)"
+                 :style="{'border-top':index===0?'none':'1px #aaa solid'}"></PoiComponent>
           </div>
         </div>
       </transition>
       <transition name="search-result">
-        <div v-if="searchResult!==null" class="ps-result-close ps-component" :style="{'width':height,'height':height}">
+        <div v-if="searchResult!==null&&searchResult.length>0" class="ps-result-close ps-component" :style="{'width':height,'height':height}">
           <div class="ps-icon-div"><i style="cursor: pointer" class="el-icon-close" @click="onClose"></i></div>
         </div>
       </transition>
@@ -39,8 +39,10 @@
 <script lang="ts" setup>
 import API from "../http/api";
 import notice from "../util/notice";
-import Poi from "./Poi.vue";
-import { ref, shallowRef} from "vue";
+import PoiComponent from "./Poi.vue";
+import { shallowRef} from "vue";
+import { Poi } from "../entity/Poi";
+import { SimpleResponse } from "../entity/SimpleResponse";
 
 const props = withDefaults(defineProps<{
   placeholder: string
@@ -48,10 +50,10 @@ const props = withDefaults(defineProps<{
   height: string
   maxHeight: string
 }>(), {placeholder: "输入查询", width: "330px", height: "45px", maxHeight: "500px"});
-const emit = defineEmits(["locate", "select", "search"]);
+const emit = defineEmits(["locate", "select", "search", "close"]);
 
 let key = shallowRef("");
-let searchResult = shallowRef(null);
+let searchResult = shallowRef<Poi[]>([]);
 
 let inSearching = shallowRef(false);
 
@@ -61,11 +63,12 @@ const search = () => {
       inSearching.value = true;
       API.searchPoi(key.value).then(resp => {
         inSearching.value = false;
-        if (resp.data.status === 0) {
-          searchResult.value = resp.data.data;
+        let data=resp.data as SimpleResponse<Poi[]>;
+        if (data.status === 0) {
+          searchResult.value = data.data;
           emit("search", searchResult.value);
         } else {
-          notice.error(resp.data.message);
+          notice.error(data.message);
         }
       }).catch(e => {
         inSearching.value = false;
@@ -77,7 +80,7 @@ const onLocate = () => {
   if ("geolocation" in navigator) {
     /* 地理位置服务可用 */
     navigator.geolocation.getCurrentPosition(function (position) {
-      emit("locate", {lat: position.coords.latitude, lon: position.coords.longitude})
+      emit("locate", {pid:"0",name:"pos",address:"your postion",type:"000000",lat: position.coords.latitude, lon: position.coords.longitude})
     }, function (error) {
       notice.error(`未能成功获取到您的地理位置 ERROR_MESSAGE : ${error.message}`)
     });
@@ -86,19 +89,15 @@ const onLocate = () => {
   }
 };
 const onClose = () => {
-  searchResult.value = null;
+  searchResult.value = [];
   emit("close");
 };
-const onSelect = (poi) => {
+const onSelect = (poi:Poi) => {
   emit("select", poi);
 }
 </script>
 
 <style scoped>
-.poi-search {
-
-}
-
 .ps-icon-div {
   display: flex;
   align-items: center;
