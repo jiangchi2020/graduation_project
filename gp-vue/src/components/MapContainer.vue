@@ -57,9 +57,6 @@ onMounted(()=>{
       // layers: [background, countryBoundary, railway]
       layers: [background]
     });
-    map.on('zoomchange',function (e:any){
-      console.log(e.target.getZoom());
-    })
     // 车站标记样式
     let stationStyle = {
       url: '/station2.ico',
@@ -90,11 +87,11 @@ onMounted(()=>{
 })
 
 watch(() => props.pois ,(newValue,oldValue)=>{
-  if(oldValue!==null) {
+  if(oldValue!==null&&oldValue.length>0) {
     map.remove(poiMarkers)
     poiMarkers=null;
   }
-  if(newValue!==null){
+  if(newValue!==null&&newValue.length>0){
     let poiMarks=[];
     let maxLon=0,minLon=360,maxLat=0,minLat=360;
     for(let poi of newValue){

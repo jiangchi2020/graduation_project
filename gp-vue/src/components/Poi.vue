@@ -2,7 +2,7 @@
   <div class="poi">
     <p @click="emit('choose')">{{ poi.name }}</p>
     <label style="font-size: small;color: #aaa">({{ poi.type }})</label>
-    <p style="color: #2c3e50;cursor: default;white-space: nowrap">地址：{{ poi.address }}</p>
+    <p style="color: #2c3e50;cursor: default;white-space: nowrap" :title="poi.address">地址：{{ split(poi.address) }}</p>
   </div>
 </template>
 
@@ -13,6 +13,13 @@ const props=defineProps<{
   poi: Poi
 }>();
 const emit = defineEmits(["choose"]);
+
+const split = (address:string)=>{
+  if(address.length>15){
+    return address.substring(0,15)+'...';
+  }
+  return address;
+}
 
 </script>
 
