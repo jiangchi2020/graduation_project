@@ -10,5 +10,5 @@ import java.util.List;
 @Mapper
 public interface PoiDao {
     Poi selectPoiById(@Param("pid") Long pid,@Param("poiCode") String poiCode);
-    List<Poi> bufferAnalysis(@Param("key") Keyword key,@Param("p") int p,@Param("c") int c);
+    List<Poi> bufferAnalysis(@Param("key") Keyword key,@Param("p") long p,@Param("c") int c);
 }

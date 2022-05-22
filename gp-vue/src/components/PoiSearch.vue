@@ -1,5 +1,8 @@
 <template>
-  <div class="poi-search" :style="{ width: `calc(${width} + ${height} + 10px)` }">
+  <div
+    class="poi-search"
+    :style="{ width: `calc(${width} + ${height} + 10px)` }"
+  >
     <div class="ps-query" :style="{ height: height }">
       <div class="ps-query-input ps-component" :style="{ width: width }">
         <div class="ps-query-logo" :style="{ width: height }">
@@ -7,10 +10,17 @@
         </div>
         <div class="ps-query-search" :style="{ width: height }" @click="search">
           <div class="ps-icon-div">
-            <i style="cursor: pointer" :class="[loading ? 'el-icon-loading' : 'el-icon-map-location']"></i>
+          <i v-if="loading" class="el-icon-loading"></i>
+            <i v-else
+              style="cursor: pointer"
+              class="button-style el-icon-map-location"
+            ></i>
           </div>
         </div>
-        <div class="ps-query-text" :style="{ 'margin-left': height, 'margin-right': height }">
+        <div
+          class="ps-query-text"
+          :style="{ 'margin-left': height, 'margin-right': height }"
+        >
           <input type="text" v-model="key" :placeholder="placeholder" />
         </div>
       </div>
@@ -22,9 +32,14 @@
     </div>
     <div class="ps-result">
       <transition name="search-result">
-        <div v-if="searchResult !== null && searchResult.length > 0"
-          class="ps-result-list ps-component" :style="{ width: width }">
-          <div :style="{ 'max-height': `calc(${maxHeight} - ${height} - 10px)` }">
+        <div
+          v-if="searchResult !== null && searchResult.length > 0"
+          class="ps-result-list ps-component"
+          :style="{ width: width }"
+        >
+          <div
+            :style="{ 'max-height': `calc(${maxHeight} - ${height} - 10px)` }"
+          >
             <PoiComponent
               v-for="(poi, index) in searchResult"
               :key="index"
@@ -33,17 +48,24 @@
               :style="{ 'border-top': index === 0 ? 'none' : '1px #aaa solid' }"
             ></PoiComponent>
             <div class="load-more" v-if="showButtonLoadMore">
-              <span v-if="!loading" @click="searchMore">加载更多</span>
+              <span v-if="!loading" class="button-style" @click="searchMore">加载更多</span>
               <i v-else class="el-icon-loading"></i>
             </div>
           </div>
         </div>
       </transition>
       <transition name="search-result">
-        <div v-if="searchResult !== null && searchResult.length > 0"
-          class="ps-result-close ps-component" :style="{ width: height, height: height }">
+        <div
+          v-if="searchResult !== null && searchResult.length > 0"
+          class="ps-result-close ps-component"
+          :style="{ width: height, height: height }"
+        >
           <div class="ps-icon-div">
-            <i style="cursor: pointer" class="el-icon-close" @click="onClose"></i>
+            <i
+              style="cursor: pointer"
+              class="el-icon-close"
+              @click="onClose"
+            ></i>
           </div>
         </div>
       </transition>
@@ -58,6 +80,7 @@ import PoiComponent from "./Poi.vue";
 import { shallowRef } from "vue";
 import { Poi } from "../entity/Poi";
 import { SimpleResponse } from "../entity/SimpleResponse";
+import { load } from "@amap/amap-jsapi-loader";
 
 const props = withDefaults(
   defineProps<{
@@ -116,27 +139,32 @@ const search = () => {
   }
 };
 const searchMore = () => {
-  API.searchMorePoi(
-    keyword,
-    searchResult.value[searchResult.value.length - 1].pid,
-    COUNT_PRE_PAGE
-  )
-    .then(resp => {
-      loading.value = false;
-      let data = resp.data as SimpleResponse<Poi[]>;
-      if (data.status === 0) {
-        if (data.data.length < COUNT_PRE_PAGE) {
-          showButtonLoadMore.value = false;
-        } else {
-          showButtonLoadMore.value = true;
+  if (!loading.value) {
+    loading.value=true;
+    API.searchMorePoi(
+      keyword,
+      searchResult.value[searchResult.value.length - 1].pid,
+      COUNT_PRE_PAGE
+    )
+      .then((resp) => {
+        loading.value = false;
+        let data = resp.data as SimpleResponse<Poi[]>;
+        if (data.status === 0) {
+          if (data.data.length < COUNT_PRE_PAGE) {
+            showButtonLoadMore.value = false;
+          } else {
+            showButtonLoadMore.value = true;
+          }
+          if (data.data.length > 0) {
+            searchResult.value = searchResult.value.concat(data.data);
+            emit("search", searchResult.value);
+          }
         }
-      }
-      searchResult.value = searchResult.value.concat(data.data);
-      emit("search", searchResult.value);
-    })
-    .catch((e) => {
-      loading.value = false;
-    });
+      })
+      .catch((e) => {
+        loading.value = false;
+      });
+  }
 };
 const onLocate = () => {
   if ("geolocation" in navigator) {
@@ -180,11 +208,11 @@ const onSelect = (poi: Poi) => {
   justify-content: center;
 }
 
-.load-more > span {
+.button-style {
   cursor: pointer;
 }
 
-.load-more > span:active {
+.button-style:active {
   color: dodgerblue;
 }
 
@@ -196,10 +224,6 @@ const onSelect = (poi: Poi) => {
   height: 100%;
   position: relative;
   font-size: large;
-}
-
-.ps-icon-div > i:active {
-  color: dodgerblue;
 }
 
 .ps-component {

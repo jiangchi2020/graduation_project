@@ -19,9 +19,6 @@ public class PoiServiceImpl implements PoiService {
     @Autowired
     private PoiDao dao;
 
-    @Autowired
-    private NLPService nlpService;
-
     @Override
     public Poi getPoiById(Long pid, String code) {
         if (code.startsWith("05")) {
@@ -36,14 +33,7 @@ public class PoiServiceImpl implements PoiService {
     }
 
     @Override
-    public List<Poi> queryPois(String query, int p, int c) {
-        Keyword keyword = nlpService.getBufferAnalysisKeyWord(query);
-        log.info(keyword.toString());
-        return searchPois(keyword, p, c);
-    }
-
-    @Override
-    public List<Poi> searchPois(Keyword keyword, int p, int c) {
+    public List<Poi> searchPois(Keyword keyword, long p, int c) {
         return dao.bufferAnalysis(keyword, p, c);
     }
 

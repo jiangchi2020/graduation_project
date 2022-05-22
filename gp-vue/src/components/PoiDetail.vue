@@ -76,13 +76,13 @@ const flushContent = (pid: string, pcode: string) => {
 };
 
 onMounted(() => {
-  flushContent(props.poi.pid, props.poi.type);
+  flushContent(props.poi.pid, props.poi.typeCode);
 });
 
 watch(
   () => props.poi,
   (newPoi) => {
-    flushContent(newPoi.pid, newPoi.type);
+    flushContent(newPoi.pid, newPoi.typeCode);
   }
 );
 </script>

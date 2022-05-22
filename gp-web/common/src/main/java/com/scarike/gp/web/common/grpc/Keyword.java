@@ -7,6 +7,8 @@ import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @EqualsAndHashCode
 @ToString
@@ -103,5 +105,9 @@ public class Keyword {
         res.setDistance(keyword.getDistance());
         res.setPoiCode(keyword.getPoiCode());
         return res;
+    }
+
+    public String toQuery(){
+        return "type="+type+"&center="+ URLEncoder.encode(center, StandardCharsets.UTF_8) +"&distance="+distance+"&poiCode="+poiCode;
     }
 }

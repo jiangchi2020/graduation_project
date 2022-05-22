@@ -18,6 +18,7 @@ const emit = defineEmits(["select"]);
 let poiMarkers:any=null;
 let AMap:any=null;
 let map:any=null;
+let poiMarker:any=null;
 
 onMounted(()=>{
   AMapLoader.load({
@@ -110,14 +111,19 @@ watch(() => props.pois ,(newValue,oldValue)=>{
     let center=[(maxLon+minLon)/2,(maxLat+minLat)/2];
     map.add(poiMarks);
     map.setCenter(center);
-    map.setZoom(9);
+    map.setZoom(10);
     poiMarkers=poiMarks;
   }
 })
 
 watch(()=>props.poi,(newPoi)=>{
+  if(poiMarker!==null){
+    map.remove(poiMarker);
+  }
+  poiMarker=new AMap.Marker({position: new AMap.LngLat(newPoi.lon,newPoi.lat),icon:'/marker.png',anchor:'bottom-center'})
   map.setCenter([newPoi.lon, newPoi.lat]);
   map.setZoom(14);
+  map.add(poiMarker);
 })
 
 </script>

@@ -12,7 +12,7 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("合安高铁")
                                     .setType(RpcNlpResponse.QueryType.LINE)
-                                    .setDistance(3000)
+                                    .setDistance(30000)
                                     .setPoiCode(110000)
                                     .build()
                     ).build(),
@@ -21,7 +21,7 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("成渝高速线")
                                     .setType(RpcNlpResponse.QueryType.LINE)
-                                    .setDistance(1000)
+                                    .setDistance(10000)
                                     .setPoiCode(110000)
                                     .build()
                     ).build(),
@@ -30,7 +30,7 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("京广高铁")
                                     .setType(RpcNlpResponse.QueryType.LINE)
-                                    .setDistance(1000)
+                                    .setDistance(10000)
                                     .setPoiCode(110000)
                                     .build()
                     ).build(),
@@ -39,7 +39,7 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("成都东")
                                     .setType(RpcNlpResponse.QueryType.POINT)
-                                    .setDistance(1000)
+                                    .setDistance(10000)
                                     .setPoiCode(50000)
                                     .build()
                     ).build(),
@@ -48,7 +48,7 @@ public class DevRpcDegradeHandler implements RpcDegradeHandler {
                             RpcNlpResponse.Keyword.newBuilder()
                                     .setCenter("合肥南")
                                     .setType(RpcNlpResponse.QueryType.POINT)
-                                    .setDistance(1000)
+                                    .setDistance(10000)
                                     .setPoiCode(100000)
                                     .build()
                     ).build(),

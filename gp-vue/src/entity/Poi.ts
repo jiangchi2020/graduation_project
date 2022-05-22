@@ -3,6 +3,7 @@ export interface Poi{
     name: string,
     address: string,
     type: string,
+    typeCode: string,
     lon: number,
     lat: number
 }
