@@ -18,7 +18,7 @@ import { Poi } from "./entity/Poi";
 
 const poiDetailVisible=shallowRef(false);
 const pois=shallowRef<Poi[]>([]);
-const poi=shallowRef<Poi>({pid:"",name:"",address:"",type:"",lon:0,lat:0});
+const poi=shallowRef<Poi>({pid:"",name:"",address:"",type:"",lon:0,lat:0,typeCode: ""});
 
 const onLocate = (pos:Poi) => {
   poi.value=pos;

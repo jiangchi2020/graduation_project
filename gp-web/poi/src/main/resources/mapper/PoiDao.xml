@@ -31,12 +31,7 @@
     <select id="bufferAnalysis" resultMap="poiListMap">
         SELECT t1."pid" as "pid",t1."name" as "name",t1."address" as "address",t1."lon" as "lon",t1."lat" as "lat",t2."name" as "type",t1."type" as "type_code"
         FROM ${key.poiTableName} as t1 JOIN poi_code as t2 ON t1.type_code=t2.type_code
-        WHERE st_contains(
-            st_buffer(
-                (SELECT wkb_geometry FROM ${key.centerTableName} WHERE "name"=#{key.center}),
-                #{key.distance},
-                'quad_segs=4'),
-            wkb_geometry)
+        WHERE st_dwithin(wkb_geometry,(SELECT wkb_geometry FROM ${key.centerTableName} WHERE "name"=#{key.center}),#{key.distance})
           AND t1."pid" > #{p}
           AND t1."type_code"/#{key.maskCode}*#{key.maskCode} = #{key.poiCode}
         ORDER BY t1."pid" LIMIT #{c};

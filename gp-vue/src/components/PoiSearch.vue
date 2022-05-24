@@ -11,7 +11,7 @@
         <div class="ps-query-search" :style="{ width: height }" @click="search">
           <div class="ps-icon-div">
           <i v-if="loading" class="el-icon-loading"></i>
-            <i v-else
+            <i v-else title="搜索"
               style="cursor: pointer"
               class="button-style el-icon-map-location"
             ></i>
@@ -26,7 +26,7 @@
       </div>
       <div class="ps-query-locate ps-component" :style="{ width: height }">
         <div class="ps-icon-div">
-          <i style="cursor: pointer" class="el-icon-aim" @click="onLocate"></i>
+          <i style="cursor: pointer" class="el-icon-aim" title="定位" @click="onLocate"></i>
         </div>
       </div>
     </div>

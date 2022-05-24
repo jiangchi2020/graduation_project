@@ -29,25 +29,27 @@ onMounted(()=>{
     // 背景卫星图层
     let background = new AMap.TileLayer.Satellite();
     // 中国国境线图层
-    let countryBoundary = new AMap.TileLayer.WMS({
+    let countryBoundary = new AMap.TileLayer.WMTS({
       url: COUNTRY_OGC_URL,
       blend: false,
       tileSize: 256,
       params: {
-        VERSION: '1.1.1',
-        'LAYERS': 'gp:discountry',
-        SRS: "EPSG:3857",
+        VERSION: '1.0.0',
+        LAYER: 'gp:discountry',
+        TileMatrixSet: 'WebMercatorQuad',
+        // SRS: "EPSG:3857",
       }
     });
     // 中国铁路线路图层
-    let railway = new AMap.TileLayer.WMS({
+    let railway = new AMap.TileLayer.WMTS({
       url: RAILWAY_OGC_URL,
       blend: false,
       tileSize: 256,
       params: {
-        VERSION: '1.1.1',
-        'LAYERS': 'gp:cn_railway_gcj02_3857',
-        SRS: "EPSG:3857",
+        VERSION: '1.0.0',
+        LAYER: 'gp:cn_railway',
+        TileMatrixSet: 'WebMercatorQuad',
+        // SRS: "EPSG:3857",
       }
     });
     // 地图初始化
@@ -55,8 +57,8 @@ onMounted(()=>{
       zooms: [2, 16],
       zoom: 5,
       center: [105.095028,36.505157],
-      // layers: [background, countryBoundary, railway]
-      layers: [background]
+      layers: [background, countryBoundary, railway]
+      // layers: [background]
     });
     // 车站标记样式
     let stationStyle = {

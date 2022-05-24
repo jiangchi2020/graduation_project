@@ -1,2 +1,2 @@
-export const COUNTRY_OGC_URL="http://localhost:8080/geoserver/wms"
-export const RAILWAY_OGC_URL="http://localhost:8080/geoserver/wms"
+export const COUNTRY_OGC_URL=(window as any).OGC_DISCOUNTRY_URL;
+export const RAILWAY_OGC_URL=(window as any).OGC_RAILEAY_URL;

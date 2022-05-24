@@ -1,8 +1,8 @@
 <template>
   <div class="poi">
-    <p @click="emit('choose')">{{ poi.name }}</p>
+    <p @click="emit('choose')" :title="poi.name">{{ split(poi.name,20) }}</p><br/>
     <label style="font-size: small;color: #aaa">({{ poi.type }})</label>
-    <p style="color: #2c3e50;cursor: default;white-space: nowrap" :title="poi.address">地址：{{ split(poi.address) }}</p>
+    <p style="color: #2c3e50;cursor: default;white-space: nowrap" :title="poi.address">地址：{{ split(poi.address,15) }}</p>
   </div>
 </template>
 
@@ -14,8 +14,8 @@ const props=defineProps<{
 }>();
 const emit = defineEmits(["choose"]);
 
-const split = (address:string)=>{
-  if(address.length>15){
+const split = (address:string,len:number)=>{
+  if(address.length>len){
     return address.substring(0,15)+'...';
   }
   return address;
@@ -26,7 +26,7 @@ const split = (address:string)=>{
 <style scoped>
 .poi {
   width: 100%;
-  height: 80px;
+  height: 90px;
   padding: 10px 0 0 15px;
   overflow: hidden;
 }
