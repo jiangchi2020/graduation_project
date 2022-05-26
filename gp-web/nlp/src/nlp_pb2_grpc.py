@@ -15,7 +15,7 @@ class RpcNlpServiceStub(object):
             channel: A grpc.Channel.
         """
         self.analysis = channel.unary_unary(
-                '/com.scarike.gp.web.grpc.RpcNlpService/analysis',
+                '/com.scarike.gp.web.common.grpc.RpcNlpService/analysis',
                 request_serializer=nlp__pb2.RpcNlpRequest.SerializeToString,
                 response_deserializer=nlp__pb2.RpcNlpResponse.FromString,
                 )
@@ -40,11 +40,11 @@ def add_RpcNlpServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'com.scarike.gp.web.grpc.RpcNlpService', rpc_method_handlers)
+            'com.scarike.gp.web.common.grpc.RpcNlpService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
- # This class is part of an EXPERIMENTAL Api.
+ # This class is part of an EXPERIMENTAL API.
 class RpcNlpService(object):
     """Missing associated documentation comment in .proto file."""
 
@@ -59,7 +59,7 @@ class RpcNlpService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/com.scarike.gp.web.grpc.RpcNlpService/analysis',
+        return grpc.experimental.unary_unary(request, target, '/com.scarike.gp.web.common.grpc.RpcNlpService/analysis',
             nlp__pb2.RpcNlpRequest.SerializeToString,
             nlp__pb2.RpcNlpResponse.FromString,
             options, channel_credentials,

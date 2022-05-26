@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tnlp.proto\x12\x17\x63om.scarike.gp.web.grpc\"\x1e\n\rRpcNlpRequest\x12\r\n\x05query\x18\x01 \x01(\t\"\xa2\x02\n\x0eRpcNlpResponse\x12\x0e\n\x06status\x18\x01 \x01(\x11\x12\x0f\n\x07message\x18\x02 \x01(\t\x12@\n\x07keyword\x18\x03 \x03(\x0b\x32/.com.scarike.gp.web.grpc.RpcNlpResponse.Keyword\x1a\x8a\x01\n\x07Keyword\x12?\n\x04type\x18\x01 \x01(\x0e\x32\x31.com.scarike.gp.web.grpc.RpcNlpResponse.QueryType\x12\x0e\n\x06\x63\x65nter\x18\x02 \x01(\t\x12\x10\n\x08\x64istance\x18\x03 \x01(\x05\x12\x0f\n\x07poiCode\x18\x04 \x01(\x05\x12\x0b\n\x03key\x18\x05 \x01(\t\" \n\tQueryType\x12\t\n\x05POINT\x10\x00\x12\x08\n\x04LINE\x10\x01\x32n\n\rRpcNlpService\x12]\n\x08\x61nalysis\x12&.com.scarike.gp.web.grpc.RpcNlpRequest\x1a\'.com.scarike.gp.web.grpc.RpcNlpResponse\"\x00\x42/\n\x17\x63om.scarike.gp.web.grpcB\x10RpcNlpServiceApiH\x01P\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tnlp.proto\x12\x1e\x63om.scarike.gp.web.common.grpc\"\x1e\n\rRpcNlpRequest\x12\r\n\x05query\x18\x01 \x01(\t\"\xa3\x02\n\x0eRpcNlpResponse\x12\x0e\n\x06status\x18\x01 \x01(\x11\x12\x0f\n\x07message\x18\x02 \x01(\t\x12G\n\x07keyword\x18\x03 \x01(\x0b\x32\x36.com.scarike.gp.web.common.grpc.RpcNlpResponse.Keyword\x1a\x84\x01\n\x07Keyword\x12\x46\n\x04type\x18\x01 \x01(\x0e\x32\x38.com.scarike.gp.web.common.grpc.RpcNlpResponse.QueryType\x12\x0e\n\x06\x63\x65nter\x18\x02 \x01(\t\x12\x10\n\x08\x64istance\x18\x03 \x01(\x05\x12\x0f\n\x07poiCode\x18\x04 \x01(\x05\" \n\tQueryType\x12\t\n\x05POINT\x10\x00\x12\x08\n\x04LINE\x10\x01\x32|\n\rRpcNlpService\x12k\n\x08\x61nalysis\x12-.com.scarike.gp.web.common.grpc.RpcNlpRequest\x1a..com.scarike.gp.web.common.grpc.RpcNlpResponse\"\x00\x42\x36\n\x1e\x63om.scarike.gp.web.common.grpcB\x10RpcNlpServiceApiH\x01P\x01\x62\x06proto3')
 
 
 
@@ -25,7 +25,7 @@ _RPCNLPRESPONSE_QUERYTYPE = _RPCNLPRESPONSE.enum_types_by_name['QueryType']
 RpcNlpRequest = _reflection.GeneratedProtocolMessageType('RpcNlpRequest', (_message.Message,), {
   'DESCRIPTOR' : _RPCNLPREQUEST,
   '__module__' : 'nlp_pb2'
-  # @@protoc_insertion_point(class_scope:com.scarike.gp.web.grpc.RpcNlpRequest)
+  # @@protoc_insertion_point(class_scope:com.scarike.gp.web.common.grpc.RpcNlpRequest)
   })
 _sym_db.RegisterMessage(RpcNlpRequest)
 
@@ -34,12 +34,12 @@ RpcNlpResponse = _reflection.GeneratedProtocolMessageType('RpcNlpResponse', (_me
   'Keyword' : _reflection.GeneratedProtocolMessageType('Keyword', (_message.Message,), {
     'DESCRIPTOR' : _RPCNLPRESPONSE_KEYWORD,
     '__module__' : 'nlp_pb2'
-    # @@protoc_insertion_point(class_scope:com.scarike.gp.web.grpc.RpcNlpResponse.Keyword)
+    # @@protoc_insertion_point(class_scope:com.scarike.gp.web.common.grpc.RpcNlpResponse.Keyword)
     })
   ,
   'DESCRIPTOR' : _RPCNLPRESPONSE,
   '__module__' : 'nlp_pb2'
-  # @@protoc_insertion_point(class_scope:com.scarike.gp.web.grpc.RpcNlpResponse)
+  # @@protoc_insertion_point(class_scope:com.scarike.gp.web.common.grpc.RpcNlpResponse)
   })
 _sym_db.RegisterMessage(RpcNlpResponse)
 _sym_db.RegisterMessage(RpcNlpResponse.Keyword)
@@ -48,15 +48,15 @@ _RPCNLPSERVICE = DESCRIPTOR.services_by_name['RpcNlpService']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'\n\027com.scarike.gp.web.grpcB\020RpcNlpServiceApiH\001P\001'
-  _RPCNLPREQUEST._serialized_start=38
-  _RPCNLPREQUEST._serialized_end=68
-  _RPCNLPRESPONSE._serialized_start=71
-  _RPCNLPRESPONSE._serialized_end=361
-  _RPCNLPRESPONSE_KEYWORD._serialized_start=189
-  _RPCNLPRESPONSE_KEYWORD._serialized_end=327
-  _RPCNLPRESPONSE_QUERYTYPE._serialized_start=329
-  _RPCNLPRESPONSE_QUERYTYPE._serialized_end=361
-  _RPCNLPSERVICE._serialized_start=363
-  _RPCNLPSERVICE._serialized_end=473
+  DESCRIPTOR._serialized_options = b'\n\036com.scarike.gp.web.common.grpcB\020RpcNlpServiceApiH\001P\001'
+  _RPCNLPREQUEST._serialized_start=45
+  _RPCNLPREQUEST._serialized_end=75
+  _RPCNLPRESPONSE._serialized_start=78
+  _RPCNLPRESPONSE._serialized_end=369
+  _RPCNLPRESPONSE_KEYWORD._serialized_start=203
+  _RPCNLPRESPONSE_KEYWORD._serialized_end=335
+  _RPCNLPRESPONSE_QUERYTYPE._serialized_start=337
+  _RPCNLPRESPONSE_QUERYTYPE._serialized_end=369
+  _RPCNLPSERVICE._serialized_start=371
+  _RPCNLPSERVICE._serialized_end=495
 # @@protoc_insertion_point(module_scope)

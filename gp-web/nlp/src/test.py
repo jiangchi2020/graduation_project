@@ -1,5 +1,5 @@
 # encoding=utf-8
-
+import jieba
 from textrank4zh import TextRank4Keyword
 
 def keywords_extraction(text):
@@ -21,9 +21,13 @@ def keywords_extraction(text):
     # word_min_len  --  词的最小长度，默认值为1
     return keywords
 
-#jieba.load_userdict("../station_dictionary.txt")
+jieba.load_userdict("../dataset/word.txt")
 
-#seg_list = jieba.cut("合安高铁沿线的米线小吃有哪些")
-
-print(keywords_extraction("合安高铁沿线的米线小吃有哪些"))
+seg_list = jieba.cut("成都站周边五百米的米线小吃有哪些")
+print('/'.join(seg_list))
+seg_list = jieba.cut("成都东站周边五百米的米线小吃有哪些")
+print('/'.join(seg_list))
+seg_list = jieba.cut("成都东城际动走上行线沿线五百米的米线小吃有哪些")
+print('/'.join(seg_list))
+# keywords_extraction("合安高铁沿线的米线小吃有哪些"))
 

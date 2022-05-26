@@ -9,19 +9,10 @@ class NlpService(RpcNlpServiceServicer):
         return RpcNlpResponse(
             status=0,
             message="OK",
-            keyword=[
-                RpcNlpResponse.Keyword(
+            keyword=RpcNlpResponse.Keyword(
                     type=RpcNlpResponse.QueryType.POINT,
                     center="成都东",
                     distance=1000,
-                    poiCode=110000,
-                    key="公园"
-                ),
-                RpcNlpResponse.Keyword(
-                    type=RpcNlpResponse.QueryType.POINT,
-                    center="合肥南",
-                    distance=1000,
-                    poiCode=50000,
-                    key="酒店"
+                    poiCode=110000
                 )
-            ])
+        )
