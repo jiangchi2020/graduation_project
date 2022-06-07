@@ -38,7 +38,6 @@
 |:---:|:---:|:---:|:---|:---|:---|
 |common|```common```|-|maven|通用模块|2022-03-13|
 |common-spring-boot-starter|```common.starter```|-|spring boot starter|通用SpringBoot自动配置|2022-03-13|
-|nlp-interface|```grpc```|-|maven|NLP服务gRPC接口|2022-03-13|
 |gateway|```gateway```|7070+|Spring Cloud Gateway|限流网关|2022-03-16|
 |poi|```poi```|8080+|Spring Boot|POI服务|2022-03-13|
 |nlp|```-```|20880+|Python|自然语言处理模块实现|2022-03-21|
